@@ -13,13 +13,13 @@ jobs:
       - name: Compile LaTeX
         uses: dante-ev/latex-action@latest
         with:
-          root_file: src/main.tex
+          root_file: main.tex
           compiler: pdflatex
           args: -interaction=nonstopmode
 
       - name: Move and Rename PDF
         run: |
-          mv src/main.pdf output.pdf
+          mv main.pdf output.pdf
 
       - name: Commit and Push PDF
         run: |
