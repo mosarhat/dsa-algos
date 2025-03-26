@@ -10,7 +10,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Compile LaTeX
+        # This is mainly done twice because LaTex only outputs TOC on two runs. The first run reads, the second compiles.
+      - name: First LaTeX Pass
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: main.tex
+          compiler: pdflatex
+          args: -interaction=nonstopmode
+
+      - name: Second LaTeX Pass
         uses: dante-ev/latex-action@latest
         with:
           root_file: main.tex
