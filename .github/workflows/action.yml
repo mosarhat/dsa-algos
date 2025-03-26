@@ -1,0 +1,30 @@
+name: Build LaTeX PDF
+
+on: [push]
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Compile LaTeX
+        uses: dante-ev/latex-action@latest
+        with:
+          root_file: src/main.tex
+          compiler: pdflatex
+          args: -interaction=nonstopmode
+
+      - name: Move and Rename PDF
+        run: |
+          mv src/main.pdf output.pdf
+
+      - name: Commit and Push PDF
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add output.pdf
+          git commit -m "📄 Generated PDF" || echo "No changes to commit"
+          git push
