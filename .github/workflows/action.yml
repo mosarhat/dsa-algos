@@ -18,12 +18,12 @@ jobs:
           args: -interaction=nonstopmode
 
       - name: Move and Rename PDF (non-fatal)
-        run: mv main.pdf output.pdf
+        run: mv main.pdf document.pdf
 
       - name: Commit and Push PDF
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add output.pdf
+          git add document.pdf
           git commit -m "📄 Generated PDF" || echo "No changes to commit"
           git push
